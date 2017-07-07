@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <title>JavaScript Timer with sound</title>
 </head>
-<body class="theme-light">
+<body>
 
 
 <div style="font-size:150px; color:#000; font-face:Arial;"><span id="mins" class="">0</span>:<span id="secs">00</span></div>
@@ -13,14 +13,6 @@
 <button id="stop" onclick="stoppetimer()">pause</button>
 <audio id="audio" src="./sound.mp3" ></audio>
 
-<!--{0:n1}-->
-<style>
-    .container {
-        width:200px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-</style>
 <script type="text/javascript">
     var timer;
     var seconds = 30;
