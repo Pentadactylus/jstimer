@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>JavaScript Timer with sound</title>
+</head>
+<body class="theme-light">
+
+
+<div style="font-size:150px; color:#000; font-face:Arial;"><span id="mins" class="">0</span>:<span id="secs">00</span></div>
+
+<button id="start" onclick="startetimer()">start</button>
+<button id="stop" onclick="stoppetimer()">pause</button>
+<audio id="audio" src="./sound.mp3" ></audio>
+
+<!--{0:n1}-->
+<style>
+    .container {
+        width:200px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
+<script type="text/javascript">
+    var timer;
+    var seconds = 30;
+    var stopTimer = 0;
+    var until = 0;
+
+    document.getElementsByTagName('body')[0].onload = function() {
+        updateTag(seconds);
+    }
+    function startetimer() {
+        clearInterval(timer);
+        if( stopTimer==0 ) { 
+            until = Date.now()+seconds*1000;
+        }
+        else {
+            until = until + (Date.now()-stopTimer);
+            stopTimer = 0;
+        }
+        timer = setInterval(updateProgress, 100);
+    }
+    function stoppetimer() {
+        if( stopTimer==0 ) {
+            clearInterval(timer);
+            stopTimer = Date.now();
+        }
+    }
+    function updateProgress() {
+        var remaining = (until - Date.now())/1000;
+        if (remaining <= 0) {
+            clearInterval(timer);
+            document.getElementById('audio').play();
+        }
+        else {
+            updateTag(remaining);
+        }
+    }
+    function updateTag(remaining) {
+                    document.getElementById("mins").innerText = Math.round(Math.floor(remaining/60));
+            sec = Math.round(Math.floor(remaining%60));
+            if(sec<10) {
+                sec = "0"+sec;
+            }
+            document.getElementById("secs").innerText = sec;
+    }
+</script>
+</body>
+</html>
